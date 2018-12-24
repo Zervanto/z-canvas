@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{
+		border: 1px solid black;
+	}
+	</style>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script type="text/javascript">
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+	var cas= document.getElementById("cas"),
+		ctx = cas.getContext("2d");
+	//data数组里存放数据	
+	var data = [70,16,1],
+		sum =0;
+	//遍历数组	
+	data.forEach(function(v){
+		sum+=v;
+	});
+	var data2 =data.map(function(v){
+		return {value : v,angle :v*360/sum};
+	});
+	var colors = "skyblue,hotpink,lightgreen,indigo,ivory,khaki,lavender,lavenderblush,lawngreen,lemonchiffon".split( ',' );
+	var start =-90;
+	data2.forEach(function(v,i){
+		ctx.beginPath();
+		ctx.fillStyle =colors[i];
+		ctx.moveTo(300,200);
+		ctx.arc(300,200,100,toRadian(start),toRadian(start+=v.angle));
+		ctx.fill();
+	});
+	//绘制一个外圆，显得美观
+	ctx.beginPath();
+	ctx.lineWidth = 2;
+	ctx.strokeStyle ="pink";
+	ctx.arc(300,200,105,0,2*Math.PI);
+	ctx.stroke();
+</script>
+</body>
+</html> 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script type="text/javascript">
+var cas =document.getElementById('cas');
+var ctx = cas.getContext('2d');
+	var x=100,
+		y=100,
+		w=100,
+		h=100,
+		step=3;
+ 	var intervalId =setInterval(function(){
+ 		ctx.clearRect(x,y,w,h);
+ 		x+=step;
+ 		if(x>=400){
+ 			x=400;
+ 			clearInterval(intervalId);
+ 		}
+ 		ctx.fillRect(x,y,w,h);
+ 	},20);
+</script>
+</body>
+</html> 

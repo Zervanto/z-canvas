@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{
+		border: 1px solid black;
+	}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" style="display:block; margin:0 auto;" id="cas"></canvas>
+<script type="text/javascript">
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+		var cas=document.getElementById("cas"),
+			ctx=cas.getContext("2d");
+		var x=cas.width/2,
+			y=cas.height/2,
+			r=100,
+			colors=["blue","orange","green"],
+			start=-90,
+			step=120;
+		var x1,y1,
+			d=30,
+			underline,
+			paddingX=20/3,
+			paddingY=20/3,
+			txts=["baidu","alibaba","tencent"];
+	
+		ctx.font="20px consolas";		
+		for(var i=0;i<3;i++){
+			ctx.beginPath();
+			ctx.fillStyle=colors[i];
+			ctx.moveTo(x,y);
+			ctx.arc(x, y, r,toRadian(start),toRadian( start+step));
+			ctx.fill();
+			x1=x+(r+d)*Math.cos(toRadian(start+step/2));
+			y1=y+(r+d)*Math.sin(toRadian(start+step/2));
+			ctx.beginPath();
+			ctx.strokeStyle=colors[i];
+			ctx.moveTo(x,y);
+			ctx.lineTo(x1, y1);
+			underline=ctx.measureText(txts[i]).width+2*Math.abs(paddingX);
+			if (start+step/2<270&&start+step/2>90) {
+				underline = -ctx.measureText(txts[i]).width-2*Math.abs(paddingX);
+				ctx.textAlign="right";
+				paddingX=-20/3;
+			}
+			ctx.lineTo(x1+underline,y1);
+			ctx.stroke();
+
+
+			ctx.fillText(txts[i],x1+paddingX,y1-paddingY);
+			start+=step;
+		}	
+</script>
+</body>
+</html> 

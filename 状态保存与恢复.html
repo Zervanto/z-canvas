@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400" id="cas"></canvas>
+</body>
+<script>
+	
+	// 处理弧度与角度的计算
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+
+
+	var cas = document.getElementById( 'cas' );
+
+	var ctx = cas.getContext( '2d' );
+	
+	
+	function Rect ( config ) {
+		// config 需要有哪些参数
+		// x, y, width, height, ctx
+		this.ctx = config.ctx;
+		this.x = config.x;
+		this.y = config.y;
+		this.width = config.width;
+		this.height = config.height;
+
+		this.lineWidth = config.lineWidth;
+		this.strokeStyle = config.strokeStyle;
+		this.fillStyle = config.fillStyle;
+
+	}
+	Rect.prototype = {
+		constructor: Rect,
+		stroke: function () {
+			// 需要将参数都弄过来
+
+			var ctx = this.ctx;
+			
+			ctx.save();
+
+
+			ctx.lineWidth = this.lineWidth;
+
+			if ( this.strokeStyle ) { 
+				ctx.strokeStyle = this.strokeStyle;
+			}
+
+			ctx.strokeRect( this.x, this.y, this.width, this.height );
+
+			ctx.restore();
+		},
+		fill: function () {
+
+			var ctx = this.ctx;
+
+			ctx.save();
+
+			ctx.lineWidth = this.lineWidth;
+
+			if ( this.fillStyle ) { 
+				ctx.fillStyle = this.fillStyle;
+			}
+
+			ctx.fillRect( this.x, this.y, this.width, this.height );
+
+			ctx.restore();
+		}
+	}
+
+
+	var rect1 = new Rect({
+		ctx: ctx,
+		x: 10,
+		y: 10,
+		width: 100,
+		height: 50,
+		strokeStyle: 'red',
+		lineWidth: 10
+	});
+
+	rect1.stroke();
+
+
+	var rect2 = new Rect({
+		ctx: ctx,
+		x: 200,
+		y: 200,
+		width: 200,
+		height: 100
+	});
+
+	rect2.stroke();
+
+
+	var rect3 = new Rect({
+		ctx: ctx,
+		x: 200,
+		y: 10,
+		width: 200,
+		height: 100,
+	});
+
+	rect3.stroke();
+
+
+
+</script>
+</html>

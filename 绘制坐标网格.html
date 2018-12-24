@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="500" height="500" id="cas"></canvas>
+</body>
+<script>
+var cas = document.getElementById('cas');
+var ctx = cas.getContext('2d');
+var a= 20;
+var x = cas.height/a;
+var y = cas.width/a;
+for(var i= 0;i<x;i++){
+	for(var j=0;j<y;j++){
+		ctx.moveTo(j*a,(i+1)*a);
+		ctx.lineTo(j*a+a,(i+1)*a);
+		ctx.lineTo(j*a+a,i*a);
+	}
+}
+ctx.stroke();
+</script>
+</html>

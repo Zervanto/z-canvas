@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{
+		border: 1px solid black;
+	};
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+	<script type="text/javascript">
+		var cas = document.getElementById('cas'),
+			ctx = cas.getContext('2d');
+		var padding = 30,
+			x0 = padding,
+			y0 = cas.height-padding,
+			arrow =20,
+			maxX = cas.width - padding*2 -arrow,
+			maxY = cas.height - padding*2 -arrow;
+		ctx.moveTo(x0,y0);
+		ctx.lineTo(x0+maxX +arrow,y0);	
+		ctx.moveTo(x0,y0);	
+		ctx.lineTo(x0,y0-maxY-arrow);
+		ctx.stroke();
+		ctx.beginPath();
+		ctx.moveTo(x0+maxX+arrow,y0);
+		ctx.lineTo(x0+maxX,y0-arrow/2);
+		ctx.lineTo(x0+maxX+arrow/2,y0);
+		ctx.lineTo(x0+maxX,y0+arrow/2);
+		ctx.closePath();		
+		ctx.moveTo(x0,padding);
+		ctx.lineTo(x0-arrow/2,padding+arrow);
+		ctx.lineTo(x0,padding+arrow/2);
+		ctx.lineTo(x0+arrow/2,padding+arrow);
+		ctx.closePath();
+		ctx.fill();
+
+		var data1 = [[1,15],[5,10],[12,18],[15,10],[20,15]];
+
+		for(var i =0; i<data1.length -1;i++){
+			for(var j=0;j<data1.length-i-1;j++){
+				if ( data1[ j ][ 0 ] > data1[ j + 1 ][ 0 ] ) {
+				var t = data1[ j ][ 0 ];
+				data1[ j ][ 0 ] = data1[ j+1 ][ 0 ];
+				data1[ j+1 ][ 0 ] = t;
+				}
+			}
+		}
+
+		var data2 =[];
+
+		var dataMaxX = Math.max.apply(null,data1.map(function(v){return v[0]}));
+		var dataMaxY = Math.max.apply(null,data1.map(function(v){return v[1]}));
+
+		ctx.beginPath();
+		ctx.fillStyle = 'red';
+		for(var i =0; i<data1.length; i++){
+
+			var tmpX =data1[i][0],
+				tmpY =data1[i][1];
+			tmpX = tmpX *maxX /dataMaxX;			
+			tmpY = tmpY *maxY /dataMaxY;
+
+			tmpX = x0 +tmpX;
+			tmpY = y0 -tmpY;
+			data2.push([tmpX,tmpY]);
+
+			ctx.moveTo( tmpX - 4, tmpY - 4 );
+			ctx.lineTo( tmpX + 4, tmpY - 4 );
+			ctx.lineTo( tmpX + 4, tmpY + 4 );
+			ctx.lineTo( tmpX - 4, tmpY + 4 );
+			ctx.closePath();
+		}
+		ctx.fill();
+
+		ctx.beginPath();
+		ctx.strokeStyle='red';
+		data2.forEach(function(v){
+			ctx[['moveTo','lineTo'][i==0?0:1]](v[0],v[1]);
+
+		});
+		ctx.stroke();
+	</script>
+</body>
+</html> 

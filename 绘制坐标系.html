@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		canvas{
+		border:1px solid black;
+	}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas" style="display:block;margin:0 auto;"></canvas>
+	<script type="text/javascript">
+		var cas= document.getElementById('cas');
+		var ctx = cas.getContext('2d');
+		var paddingTop =30,
+			paddingLeft =30,
+			paddingRight=30,
+			paddingBottom=30,
+			arrow=20,
+			x0= paddingLeft,
+			y0 = cas.height - paddingBottom;
+		//绘制坐标轴线
+		ctx.moveTo(x0,paddingTop);
+		ctx.lineTo(x0,y0);
+		ctx.lineTo(cas.width-paddingRight,y0);
+		ctx.stroke();
+		//绘制箭头
+		ctx.beginPath();
+		ctx.moveTo(cas.width-paddingRight,y0);
+		ctx.lineTo(cas.width-paddingRight-arrow,y0-arrow*.5);
+		ctx.lineTo(cas.width-paddingRight-arrow*.5,y0);
+		ctx.lineTo(cas.width-paddingRight-arrow,y0+arrow*.5);
+		ctx.closePath();
+		ctx.moveTo(x0,paddingTop);
+		ctx.lineTo(x0-arrow*.5,paddingTop+arrow);
+		ctx.lineTo(x0,paddingTop+arrow*.5);
+		ctx.lineTo(x0+arrow*.5,paddingTop+arrow);
+		ctx.closePath();
+		ctx.fill();
+		//绘制点 让其位于坐标轴中间
+		ctx.beginPath();
+		var x = (cas.width-paddingRight-paddingLeft-arrow)*.5;
+		var y = (cas.height-paddingTop-paddingBottom-arrow)*.5;
+		//坐标转换
+		var x = x0+x,
+			y = y0-y,
+		 	point =8;
+		ctx.fillStyle="red";
+		ctx.moveTo(x-point*.5,y-point/2);
+		ctx.lineTo(x+point*.5,y-point/2);
+		ctx.lineTo(x+point*.5,y+point/2);
+		ctx.lineTo(x-point*.5,y+point/2);
+		ctx.closePath();
+		ctx.fill();
+	</script>
+</body>
+</html> 

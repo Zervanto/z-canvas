@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400" id="cas"></canvas>
+</body>
+<script>
+	
+	// 处理弧度与角度的计算
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+
+
+	var cas = document.getElementById( 'cas' );
+
+	var ctx = cas.getContext( '2d' );
+	
+	
+	// 1, 创建图片对象. 其实就是 img 标签
+	// 		document.createElement( 'img' )
+	// 		简化的写法: new Image()
+	var img = new Image();
+	img.src = './辣滑稽.jpg';
+	// document.body.appendChild( img );
+
+	// 2, 确定要绘制到哪一个位置
+	var x = 100, 
+		y = 100,
+		width,
+		height=200;
+
+	// 3, 开始绘制( 需要等待, 等到图片加载完毕后再执行 )
+	// ctx.drawImage( img, x, y );
+	// console.log( img.width );
+	img.onload = function () {
+		width=img.width*height/img.height;
+
+		ctx.drawImage( img, x, y,width,height);
+
+		console.log( img.width );
+		console.log( img.height );
+
+	};
+
+
+</script>
+</html>

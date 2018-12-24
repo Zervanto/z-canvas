@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400" id="cas"></canvas>
+</body>
+<script>
+	
+	// 处理弧度与角度的计算
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+
+
+	var cas = document.getElementById( 'cas' );
+
+	var ctx = cas.getContext( '2d' );
+	var x1 =cas.width/4,
+		y1 = cas.height/2,
+		r = 100;
+	ctx.beginPath();
+
+	ctx.scale( 0.5, 1 );  // 将 x 轴的长度缩小一半, y 轴不变
+
+
+	ctx.strokeStyle = 'green';
+	ctx.arc( x1, y1, r, 0, 2 * Math.PI );
+	ctx.stroke();	
+
+
+
+	// 将坐标系绘制到正中央	
+	ctx.translate(cas.width/2,cas.height/2)
+
+	// 将坐标系旋转 30 度
+	ctx.beginPath();
+	ctx.rotate( toRadian( 45 ) );
+
+	// 绘制矩形
+	ctx.beginPath();
+	ctx.strokeStyle = 'red';
+	ctx.strokeRect( -50, -50, 100, 100 );
+
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <style>
+    #app{
+        text-align: center;
+    }   
+    input{
+        vertical-align: middle;
+    }
+    #main{
+        width: 640px;
+        margin: auto;
+        position:relative;
+    }
+    #canvas{
+        position:absolute;
+    }
+    </style>
+    <div id="app">
+        <h1>弹幕效果</h1>
+        <div id="main">
+            <canvas id="canvas"></canvas>
+            <video id="video" src="./01.微积分和梯度.mp4" width="640" heigth="380" controls></video>
+        </div>
+        <input type="text" id="text">
+        <button id="send">发送弹幕</button>
+        <input id="color" type="color">
+        <input id="range" type="range" max="50" min="20">
+    </div>
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+</body>
+
+</html>

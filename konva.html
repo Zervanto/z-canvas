@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+	<script src="./konva.min.js"></script>
+</head>
+<body>
+	<div id="zz"></div>
+</body>
+<script>
+	// 使用 Konva 的步骤
+	// 1. 需要引入 Konva 库
+	// 2. 在页面中放置一个 div 作为舞台的容器(需要设置 id 属性)
+	// 3. 使用 Konva 创建舞台
+	//		在 Konva 中 Konva 这个名字是一个命名空间, 所有的构造函数都是它的成员
+	// 4. 创建舞台使用 Konva.Stage
+	//		参数必须有 width, height, container
+
+	var stage = new Konva.Stage({
+		width:window.innerWidth,
+		height:window.innerHeight,
+		container:"zz"
+	});
+
+	// 舞台中要有层
+	var layer = new Konva.Layer();
+	stage.add( layer );
+	var star = new Konva.Star({
+		x:stage.getWidth()/2,
+		y:stage.getHeight()/2,
+		numPoints:8,
+		innerRadius:100,
+		outerRadius:200,
+		fill:'blue',
+		draggable:true
+	});
+
+	// 将 矩形放置到 层中. 将层放在舞台里
+	// 使用 add 方法
+	layer.add( star);
+	
+	layer.draw();
+
+</script>
+
+</html>

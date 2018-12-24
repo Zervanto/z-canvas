@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+		<script type="text/javascript">
+	var cas = document.getElementById("cas"),
+		ctx = cas.getContext("2d");
+		function Line(obj){
+			this.ctx = obj.ctx;
+			this.x0 = obj.x0;
+			this.y0 = obj.y0;
+			this.x1 = obj.x1;
+			this.y1 = obj.y1;
+			this.strokeStyle = obj.strokeStyle;
+			this.lineWidth = obj.lineWidth;
+		}
+
+		Line.prototype = {
+			constructor:Line,
+			stroke:function(){
+				this.ctx.moveTo(this.x0,this.y0);
+				this.ctx.lineTo(this.x1,this.y0);
+				this.ctx.stroke();
+				if(obj.strokeStyle){
+					
+				}
+			}
+		};
+		var line1 = new Line({
+			ctx:ctx,
+			x0:100,
+			y0:100,
+			x1:400,
+			y1:100,
+			strokeStyle:'red',
+			lineWidth:5
+		});
+		line1.stroke();
+	</script>
+</body>
+</html> 

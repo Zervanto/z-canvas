@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas:{
+		border: 1px solid black;
+	}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas" style="display:block;margin:5px auto;"></canvas>
+<script>
+var cas = document.getElementById('cas'),
+	ctx = cas.getContext("2d");
+	ctx.circle=function(s,x,y,r,b,e,d){
+		this.beginPath();
+		this.fillStyle=s;
+		this.arc(x,y,r,b,e,d);
+		this.fill();
+		this.closePath();
+	}
+
+	ctx.moveTo(cas.width/2,cas.height/2);
+	ctx.circle("#FED172",100,300,100,0,Math.PI*2,false);
+	ctx.circle("#E9E4E4",40,275,35,Math.PI*1.1,Math.PI*1.9,false);
+	ctx.circle("#FED172",40,290,30,Math.PI*1.1,Math.PI*1.9,false);
+	ctx.circle("#E9E4E4",67,260,5,0,Math.PI*2,false);
+	ctx.circle("#6F3711",20,260,7,0,Math.PI*2,false);
+	ctx.circle("#E9E4E4",160,275,35,Math.PI*1.1,Math.PI*1.9,false);
+	ctx.circle("#FED172",160,290,30,Math.PI*1.1,Math.PI*1.9,false);
+	ctx.circle("#6F3711",140,260,7,0,Math.PI*2,false);
+	ctx.circle("#6F3711",100,300,70,Math.PI*1,Math.PI*2,true);
+	ctx.circle("#FED172",100,280,80,Math.PI*1,Math.PI*2,true);
+	ctx.circle("#6F3711",60,220,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FED172",60,230,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#6F3711",140,220,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FED172",140,230,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FDA566",40,300,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FED172",40,315,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FDA566",160,300,20,Math.PI*1,Math.PI*2,false);
+	ctx.circle("#FED172",160,315,20,Math.PI*1,Math.PI*2,false);
+
+
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI;
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+
+</script>
+</body>
+</html>

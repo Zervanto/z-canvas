@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas width="600" height="400" id="cas"></canvas>
+</body>
+<script>
+	function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+	var cas = document.getElementById( 'cas' );
+	var ctx = cas.getContext( '2d' );
+	
+	function Rect(obj){
+		this.ctx =obj.ctx;
+		this.x = obj.x;
+		this.y = obj.y;
+		this.width = obj.width;
+		this.height = obj.height;
+		this.lineWidth = obj.lineWidth;
+		this.strokeStyle = obj.strokeStyle;
+		this.fillStyle = obj.fillStyle;
+	}
+
+	Rect.prototype = {
+		constructor:Rect,
+		stroke:function(){
+			var ctx = this.ctx;
+			ctx.lineWidth = this.lineWidth;
+			if(this.strokeStyle){
+				ctx.strokeStyle = this.strokeStyle;
+			}
+			ctx.strokeRect(this.x, this.y, this.width, this.height) ;
+		},
+		fill:function(){
+			var ctx = this.ctx;
+			ctx.lineWidth = this.lineWidth;
+			if(this.fillStyle){
+				ctx.fillStyle = this.fillStyle;
+			}
+			ctx.fillRect(this.x, this.y, this.width, this.height);
+		}
+	}
+	var rect1 = new Rect({
+		ctx: ctx,
+		x: 100,
+		y: 100,
+		width: 200,
+		height: 100,
+		strokeStyle: 'lightgreen',
+		lineWidth: 10
+	});
+
+	rect1.stroke();
+
+
+	var rect2 = new Rect({
+		ctx: ctx,
+		x: 125,
+		y: 125,
+		width: 100,
+		height: 50,
+		fillStyle: 'skyblue'
+	});
+
+	rect2.fill();
+</script>
+</html>

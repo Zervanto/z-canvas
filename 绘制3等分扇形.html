@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+		<style>
+		canvas {
+			border:1px solid black;
+		}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas"></canvas>
+<script type="text/javascript">
+	var cas = document.getElementById('cas'),
+	ctx = cas.getContext("2d");
+		function toAngle ( radian ) {
+		return radian * 180 / Math.PI; 
+	}
+	function toRadian ( angle ) {
+		return angle * Math.PI / 180;
+	}
+//txtLine 文本的下划线长度
+	var x = cas.width/2,
+		y = cas.height/2,
+		r = 100,
+		start = -90,
+		step =120,
+		colors = "red,green,blue".split(','),
+		txts = "windows,linux,macos".split(','),
+		x1,y1,
+		distance = 30,
+		txtLine,
+		paddingX = 20/3 ,
+		paddingY = 20/3;
+	ctx.font="20px consolas";	
+	for(var i = 0; i< 3; i++){
+		ctx.beginPath();
+		ctx.fillStyle = colors[i];
+		ctx.moveTo(x,y);
+		ctx.arc(x,y,r,toRadian(start),toRadian(start+step));
+		ctx.fill();
+		ctx.beginPath();
+		ctx.strokeStyle = colors[i];
+		ctx.moveTo(x,y);
+		x1 = x+(r+distance)*Math.cos(toRadian(start+step/2));
+		y1 = y+(r+distance)*Math.sin(toRadian(start+step/2));
+		ctx.lineTo(x1,y1);
+		//measureText() 	方法返回包含一个对象，该对象包含以像素计的指定字体宽度。
+		txtLine = ctx.measureText(txts[i]).width+2*Math.abs(paddingX);	
+		if (start+step/2<270&&start+step/2>90) {
+			txtLine = -ctx.measureText(txts[i]).width-2*Math.abs(paddingX);
+			ctx.textAlign = 'right';
+			paddingX = -20/3;
+		}
+		ctx.lineTo(x1+txtLine, y1);
+		ctx.stroke();
+		ctx.fillText(txts[i], x1+paddingX, y1-paddingY);
+		start+=step;
+	}
+	
+</script>
+</body>
+</html> 

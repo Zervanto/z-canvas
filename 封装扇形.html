@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	canvas{
+		border: 1px solid black;
+	}
+	</style>
+</head>
+<body>
+<canvas width="600" height="400" id="cas">
+</canvas>
+<script type="text/javascript">
+		var cas = document.getElementById("cas"),
+			ctx = cas.getContext("2d");
+		ctx.sector = function(x,y,r,angle1,angle2){
+            this.save();
+            this.beginPath();
+            this.moveTo(x,y);
+            this.arc(x,y,r,angle1*Math.PI/180,angle2*Math.PI/180,false);
+            this.closePath();    
+            this.restore();
+            return this;
+        };
+        ctx.sector(100,50,100,30,60).stroke();
+        ctx.sector(100,200,200,60,120).fill();
+        ctx.sector(200,200,50,160,180).stroke();
+			
+</script>
+</body>
+</html> 
